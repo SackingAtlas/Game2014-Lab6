@@ -10,6 +10,7 @@ public class PlayerBehavior : MonoBehaviour
     public float horizForce;
     public float vertForce;
     public bool isGrounded;
+    public Transform SpawnPoint;
 
     private Rigidbody2D m_rigidbody2D;
     private SpriteRenderer m_spriteRenderer;
@@ -68,5 +69,12 @@ public class PlayerBehavior : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         isGrounded = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //respawn
+        if(other.gameObject.CompareTag("KillZone"))
+        transform.position = SpawnPoint.position;
     }
 }
